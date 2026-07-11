@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taki Gold | Demonstração</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #0a0a0a; color: #ffffff; font-family: sans-serif; }
+        .gold-text { color: #d4af37; }
+        .bg-gold { background-color: #d4af37; }
+    </style>
+</head>
+<body>
 
+    <!-- Header -->
+    <header class="p-6 border-b border-zinc-800 flex justify-between items-center">
+        <h1 class="text-2xl font-bold gold-text">TAKI GOLD</h1>
+        <button onclick="document.getElementById('adminPanel').classList.remove('hidden')" class="text-xl gold-text"><i class="fas fa-chart-line"></i></button>
+    </header>
+
+    <main class="p-6">
+        <h2 class="text-white font-bold mb-4">Lojas Disponíveis</h2>
+        <div id="restaurante-grid" class="grid grid-cols-1 gap-4">
+            <!-- Hamburgueria (Exemplo Principal) -->
+            <div class="bg-zinc-900 p-4 rounded-xl border border-zinc-800">
+                <h4 class="font-bold text-lg gold-text">Viking Burger</h4>
+                <p class="text-sm text-zinc-400">Cardápio: Monstro Duplo (R$ 32,90), X-Bacon (R$ 28,00)</p>
+                <button class="mt-2 w-full py-2 bg-zinc-800 rounded text-sm">Ver Cardápio</button>
+            </div>
+            <!-- Exemplo de outras lojas -->
+            <div class="bg-zinc-900 p-4 rounded-xl border border-zinc-800 opacity-60">
+                <h4 class="font-bold text-lg">Sushi Premium (Exemplo)</h4>
+                <p class="text-sm text-zinc-400">Combo Hot Roll, Sashimi Especial</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Painel de Controle -->
+    <div id="adminPanel" class="hidden fixed inset-0 bg-black p-6 z-50">
+        <h2 class="text-2xl gold-text mb-4">Cadastrar Nova Loja</h2>
+        <input id="nomeLoja" type="text" placeholder="Nome da Loja" class="w-full p-3 mb-2 bg-zinc-800 rounded text-white">
+        <textarea id="cardapioLoja" placeholder="Cardápio (ex: Prato 1 - R$ 20,00)" class="w-full p-3 mb-4 bg-zinc-800 rounded text-white"></textarea>
+        <button onclick="salvarLoja()" class="w-full bg-gold text-black font-bold py-3 rounded">Publicar Loja</button>
+        <button onclick="document.getElementById('adminPanel').classList.add('hidden')" class="w-full mt-4 text-zinc-500">Fechar</button>
+    </div>
+
+    <script>
+        function salvarLoja() {
+            const nome = document.getElementById('nomeLoja').value;
+            const cardapio = document.getElementById('cardapioLoja').value;
+            const grid = document.getElementById('restaurante-grid');
+            
+            const novaLoja = `
+                <div class="bg-zinc-900 p-4 rounded-xl border border-gold">
+                    <h4 class="font-bold text-lg gold-text">${nome}</h4>
+                    <p class="text-sm text-zinc-400">Cardápio: ${cardapio}</p>
+                    <button class="mt-2 w-full py-2 bg-gold text-black font-bold rounded text-sm">Ver Cardápio</button>
+                </div>
+            `;
+            grid.insertAdjacentHTML('beforeend', novaLoja);
+            document.getElementById('adminPanel').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
